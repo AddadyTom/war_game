@@ -1,6 +1,5 @@
 import join_icon from './join_game.png';
 import create_icon from './create_game.jpg';
-import Button from '@mui/material/Button';
 import './App.css';
 
 function App() {
@@ -18,9 +17,7 @@ function App() {
             </p>
           </div>
           <div className="Choice">
-            <Button>
-              <img src={join_icon} className="App-logo" alt="logo" />
-            </Button>
+            <img src={join_icon} className="App-logo" alt="logo" />
             <p>
             Join Game
             </p>
