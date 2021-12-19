@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Copyright from '../components/Copyright';
 
 const useStyles = makeStyles((theme) => ({
@@ -127,7 +127,7 @@ export default function GameSelection() {
                 </CardContent>
                 <CardActions>
                   <Button fullWidth variant={tier.buttonVariant} color="primary">
-                    <Link to={tier.route} >
+                    <Link to={tier.route}>
                      {tier.buttonText}
                     </Link>
                   </Button>

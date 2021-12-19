@@ -6,20 +6,19 @@ import {
   Navigate
 } from "react-router-dom";
 import GameSelection from './pages/GameSelection';
-
+import SettingStepper from './SettingsStepper/SettingStepper'
 
 function App() {
   
   const [loggedIn, setLoggedIn] = React.useState(false);
 
-  
   if(loggedIn) {
     return (
       <Routes>
-        <Route path='/selection' element={<GameSelection/>} />
         <Route path='/joinGame' element={<GameSelection/>} />
-        <Route path='/createGame' element={<GameSelection/>} />
+        <Route path='/createGame' element={<SettingStepper/>} />
         <Route path='/home' element={<GameSelection/>} />
+        <Route path='/selection' element={<GameSelection/>} />
         <Route path="/login" element={<Navigate to ="/selection" />}/>
         <Route path="*" element={<Navigate to ="/selection" />}/>
       </Routes>
