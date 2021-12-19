@@ -12,7 +12,7 @@ const initial_state = {
         Resources :  [{Resource : "ExampleName" , Description : 'Resources'}],
         GameType : '',
         TimeLimit : '',
-        Stops :  [{StopTime : "ExampleName" , StopReason : 'Resources'}],
+        Stops :  [{Time : "ExampleName" , StopReason : 'Resources'}],
     }
 }
 
@@ -27,12 +27,12 @@ const settingsReducer = (state = initial_state , action) => {
             case 'ChangeStopTime':
                 return {
                     ...state,
-                    Section : action.newSection
+                    TimeLimit : action.newTimeLimit
                 }
-                case 'ChangeStopReason':
+                case 'ChangeGameType':
                     return {
                         ...state,
-                        Section : action.newSection
+                        GameType : action.newGameType
                     }    
         case 'ChangeTime':
             return {
@@ -69,6 +69,11 @@ const settingsReducer = (state = initial_state , action) => {
                 ...state,
                 StartingPoint : action.newStartingPoint
             }
+            case 'ChangeStops':
+                return {
+                    ...state,
+                    Stops : action.newStops
+                }
           
     }   
     return state

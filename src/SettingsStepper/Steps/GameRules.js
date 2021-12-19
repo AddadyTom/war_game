@@ -13,69 +13,67 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const GameRules = (props) => {
 
-    const [Events , setEvents] = React.useState(props.Events ? props.Events : [])
+    const [Stops , setStops] = React.useState(props.Stops ? props.Stops : [])
 
     const handleChange = (value , setFunc) => {
         setFunc(value)
     }
 
     const handleEventChange = (value , index , valueName) => {
-        let UpdatedEvents = [...Events]
-        UpdatedEvents[index][valueName] = value
-        setEvents(UpdatedEvents)
-        props.ChangeEvents(UpdatedEvents)
-        console.log(props.Events)
+        let UpdatedStops = [...Stops]
+        UpdatedStops[index][valueName] = value
+        setStops(UpdatedStops)
+        props.ChangeStops(UpdatedStops)
+        console.log(props.Stops)
     }
 
     const handleAddEvent = () => {
-        let UpdatedEvents = [...Events , {Title : '' , Description : ''}]
-        setEvents(UpdatedEvents)
+        let UpdatedStops = [...Stops , {Time : '' , StopReason : ''}]
+        setStops(UpdatedStops)
+        props.ChangeStops(UpdatedStops)
+        console.log(UpdatedStops)
     }
 
     const handleDeleteEvent = (index) => {
-        let UpdatedEvents = [...Events]
-        UpdatedEvents.splice(index,1)
-        setEvents(UpdatedEvents)
-        props.ChangeEvents(UpdatedEvents)
+        let UpdatedStops = [...Stops]
+        UpdatedStops.splice(index,1)
+        setStops(UpdatedStops)
+        props.ChangeStops(UpdatedStops)
     }
     
 
     return(
         <Grid container spacing = {5} style ={{marginLeft : '30px'}}>
             <Grid item xs = {12}>
-                <Typography style = {{fontSize : '32px'}}>Setting</Typography>
+                <Typography style = {{fontSize : '32px'}}>Game Rules</Typography>
                 <Divider style = {{width: '20%'}}/>
             </Grid>
             <Grid item xs = {3}>
-                <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                <Select value = {props.Type} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value , props.ChangeType)}} fullWidth>
-                    <MenuItem value={'טקטי'}>טקטי</MenuItem>
-                    <MenuItem value={'אסטרטגי'}>אסטרטגי</MenuItem>
+                <InputLabel id="demo-simple-select-label">GameType</InputLabel>
+                <Select value = {props.Type} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value , props.ChangeGameType)}} fullWidth>
+                    <MenuItem value={'דמוקרטיה'}>דמוקרטיה</MenuItem>
+                    <MenuItem value={'דיקטטורה'}>דיקטטורה</MenuItem>
                 </Select>
             </Grid>
             <Grid item xs = {4}>
-                <InputLabel id="demo-simple-select-label">Time</InputLabel>
-                <TextField type = {'datetime-local'} value = {props.Time} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value , props.ChangeTime)}} fullWidth>
+                <InputLabel id="demo-simple-select-label">TimeLimit</InputLabel>
+                <TextField type = {'datetime-local'} value = {props.Time} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value , props.ChangeTimeLimit)}} fullWidth>
                 </TextField>
             </Grid>
-            <Grid item xs = {4}>
-                <InputLabel id="demo-simple-select-label">Starting Point Desctiption</InputLabel>
-                <TextField value = {props.StartingPoint} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value , props.ChangeStartingPoint)}} fullWidth>
-                </TextField>
-            </Grid>
+
            
             <Grid item xs = {12}><Typography>Add your Time Stops</Typography></Grid>
-            {Events.map((Event , index) => {
+            {Stops.map((Stop , index) => {
                 return(       
                 <>
                     <Grid item xs = {3}>
-                        <InputLabel id="demo-simple-select-label">Title</InputLabel>
-                        <TextField  value = {Event['Title']} variant= {'outlined'}  onChange = {(event) => {handleEventChange(event.target.value , index , 'Title')}} fullWidth>
+                        <InputLabel id="demo-simple-select-label">Time</InputLabel>
+                        <TextField  value = {Stop['Time']} variant= {'outlined'} type = {'datetime-local'}  onChange = {(event) => {handleEventChange(event.target.value , index , 'Time')}} fullWidth>
                         </TextField>
                     </Grid>
                     <Grid item xs = {3}>
-                        <InputLabel id="demo-simple-select-label">Description</InputLabel>
-                        <TextField multiline value = {Event.Description} variant= {'outlined'}  onChange = {(event) => {handleEventChange(event.target.value , index , 'Description')}} fullWidth>
+                        <InputLabel id="demo-simple-select-label">Stop Reason</InputLabel>
+                        <TextField multiline value = {Stop['StopReason']} variant= {'outlined'}  onChange = {(event) => {handleEventChange(event.target.value , index , 'StopReason')}} fullWidth>
                         </TextField>
                     </Grid> 
                     <Grid item xs = {5} style ={{display : 'flex' , alignItems : 'center'}}>
@@ -100,7 +98,7 @@ const GameRules = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        Events : state.settings.Events,
+        Stops : state.settings.Stops,
         Section : state.settings.Section,
         Type : state.settings.Type,
         Time : state.settings.Time,
@@ -110,10 +108,9 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-        ChangeTime: (newTime) => dispatch({type : 'ChangeTime' , newTime : newTime}),
-        ChangeType: (newType) => dispatch({type : 'ChangeType' , newType : newType}),
-        ChangeStartingPoint: (newStartingPoint) => dispatch({type : 'ChangeStartingPoint' , newStartingPoint : newStartingPoint}),
-        ChangeEvents : (newEvents) => dispatch({type : 'ChangeEvents' , newEvents : newEvents}),    
+        ChangeTimeLimit: (newTimeLimit) => dispatch({type : 'ChangeTimeLimit' , newTimeLimit : newTimeLimit}),
+        ChangeGameType: (newGameType) => dispatch({type : 'ChangeGameType' , newGameType : newGameType}),
+        ChangeStops : (newStops) => dispatch({type : 'ChangeStops' , newStops : newStops}),    
     }
   }
   
