@@ -1,18 +1,27 @@
 
 
 const initial_state = {
-    number : 0
+    settings : {
+        Section : '',
+        Characters : [{Name : "ExampleName" , Description : 'ExampleDescription'}]
+    }
 }
 
 
 const settingsReducer = (state = initial_state , action) => {
     switch (action.type){
-        case 'ChangeNumber':
+        case 'ChangeSection':
             return {
                 ...state,
-                number : action.newNumber
+                Section : action.newSection
             }
-    }
+        case 'ChangeCharacters':
+            return {
+                ...state,
+                Characters : action.newCharacters
+            }
+          
+    }   
     return state
 }
 
