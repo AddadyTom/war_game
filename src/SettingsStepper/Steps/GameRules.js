@@ -50,14 +50,14 @@ const GameRules = (props) => {
             </Grid>
             <Grid item xs = {3}>
                 <InputLabel id="demo-simple-select-label">GameType</InputLabel>
-                <Select value = {props.Type} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value , props.ChangeGameType)}} fullWidth>
+                <Select value = {props.GameType} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value , props.ChangeGameType)}} fullWidth>
                     <MenuItem value={'דמוקרטיה'}>דמוקרטיה</MenuItem>
                     <MenuItem value={'דיקטטורה'}>דיקטטורה</MenuItem>
                 </Select>
             </Grid>
             <Grid item xs = {4}>
                 <InputLabel id="demo-simple-select-label">TimeLimit</InputLabel>
-                <TextField type = {'datetime-local'} value = {props.Time} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value , props.ChangeTimeLimit)}} fullWidth>
+                <TextField type = {'datetime-local'} value = {props.TimeLimit} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value , props.ChangeTimeLimit)}} fullWidth>
                 </TextField>
             </Grid>
 
@@ -101,8 +101,8 @@ const mapStateToProps = (state) => {
         Stops : state.settings.Stops,
         Section : state.settings.Section,
         Type : state.settings.Type,
-        Time : state.settings.Time,
-        StartingPoint : state.settings.StartingPoint,
+        TimeLimit : state.settings.TimeLimit,
+        GameType : state.settings.GameType,
     }
   }
   

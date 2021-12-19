@@ -28,7 +28,7 @@ const Setting = (props) => {
     }
 
     const handleAddEvent = () => {
-        let UpdatedEvents = [...Events , {Title : '' , Description : ''}]
+        let UpdatedEvents = [...Events , {Title : '' , Description : '' , Section : ''}]
         setEvents(UpdatedEvents)
     }
 
@@ -78,7 +78,14 @@ const Setting = (props) => {
                         <TextField multiline value = {Event.Description} variant= {'outlined'}  onChange = {(event) => {handleEventChange(event.target.value , index , 'Description')}} fullWidth>
                         </TextField>
                     </Grid> 
-                    <Grid item xs = {5} style ={{display : 'flex' , alignItems : 'center'}}>
+                    <Grid item xs = {3}>
+                    <InputLabel id="demo-simple-select-label">Team</InputLabel>
+                        <Select value = {Event['Section']} variant= {'outlined'}  onChange = {(event) => {handleEventChange(event.target.value , index , 'Section')}} fullWidth>
+                            <MenuItem value={'Russia'}>Russia</MenuItem>
+                            <MenuItem value={'United States'}>United States</MenuItem>
+                        </Select>
+                    </Grid>
+                    <Grid item xs = {2} style ={{display : 'flex' , alignItems : 'center'}}>
                         <Button onClick = {() => {handleDeleteEvent(index)}}>
                             <DeleteIcon>
                             </DeleteIcon>

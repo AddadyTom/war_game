@@ -3,6 +3,7 @@
 const initial_state = {
     settings : {
         Section : '',
+        SectionTeamTwo : '',
         Characters : [{Name : "ExampleName" , Description : 'ExampleDescription'}],
         Time : '',
         Type : '',
@@ -20,11 +21,20 @@ const initial_state = {
 const settingsReducer = (state = initial_state , action) => {
     switch (action.type){
         case 'ChangeSection':
-            return {
-                ...state,
-                Section : action.newSection
+            if(action.index === 0){
+                return {
+                    ...state,
+                    Section : action.newSection
+                }
             }
-            case 'ChangeStopTime':
+            else{
+                return {
+                    ...state,
+                    SectionTeamTwo : action.newSection
+                }
+            }
+          
+            case 'ChangeTimeLimit':
                 return {
                     ...state,
                     TimeLimit : action.newTimeLimit

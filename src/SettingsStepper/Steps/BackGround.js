@@ -16,8 +16,8 @@ const BackGround = (props) => {
 
     const [Characters , setCharacters] = React.useState(props.Characters ?props.Characters : [])
 
-    const handleChange = (value , setFunc) => {
-        setFunc(value)
+    const handleChange = (value , setFunc , index) => {
+        setFunc(value , index)
     }
 
     const handleCharChange = (value , index , valueName) => {
@@ -25,11 +25,10 @@ const BackGround = (props) => {
         UpdatedCharacters[index][valueName] = value
         setCharacters(UpdatedCharacters)
         props.ChangeCharacters(UpdatedCharacters)
-        console.log(props.Characters , 'chars')
     }
 
     const handleAddChar = () => {
-        let UpdatedCharacters = [...Characters , {Name : '' , Description : ''}]
+        let UpdatedCharacters = [...Characters , {Name : '' , Description : '' , Section : ''}]
         setCharacters(UpdatedCharacters)
     }
 
@@ -48,17 +47,20 @@ const BackGround = (props) => {
                 <Divider style = {{width: '20%'}}/>
             </Grid>
             <Grid item xs = {3}>
-                <InputLabel id="demo-simple-select-label">Section</InputLabel>
-                <Select value = {props.Section} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value , props.ChangeSection)}} fullWidth>
-                    <MenuItem value={190}>190</MenuItem>
-                    <MenuItem value={130}>130</MenuItem>
-                    <MenuItem value={150}>150</MenuItem>
-                    <MenuItem value={110}>110</MenuItem>
+                <InputLabel id="demo-simple-select-label">Section team#1</InputLabel>
+                <Select value = {props.Section} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value ,props.ChangeSection , 0)}} fullWidth>
                     <MenuItem value={'Russia'}>Russia</MenuItem>
                     <MenuItem value={'United States'}>United States</MenuItem>
                 </Select>
             </Grid>
-            <Grid item xs = {9}></Grid>
+            <Grid item xs = {3}>
+                <InputLabel id="demo-simple-select-label">Section team#2</InputLabel>
+                <Select value = {props.SectionTeamTwo} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value , props.ChangeSection , 1)}} fullWidth>
+                    <MenuItem value={'Russia'}>Russia</MenuItem>
+                    <MenuItem value={'United States'}>United States</MenuItem>
+                </Select>
+            </Grid>
+            <Grid item xs = {6}></Grid>
             <Grid item xs = {12}><Typography>Add your Characters</Typography></Grid>
             {Characters.map((Char , index) => {
                 return(       
@@ -73,7 +75,14 @@ const BackGround = (props) => {
                         <TextField multiline value = {Char.Description} variant= {'outlined'}  onChange = {(event) => {handleCharChange(event.target.value , index , 'Description')}} fullWidth>
                         </TextField>
                     </Grid> 
-                    <Grid item xs = {5} style ={{display : 'flex' , alignItems : 'center'}}>
+                    <Grid item xs = {3}>
+                        <InputLabel id="demo-simple-select-label">Team</InputLabel>
+                        <Select value = {Char['Section']} variant= {'outlined'}  onChange = {(event) => {handleCharChange(event.target.value , index , 'Section')}} fullWidth>
+                            <MenuItem value={'Russia'}>Russia</MenuItem>
+                            <MenuItem value={'United States'}>United States</MenuItem>
+                        </Select>
+                    </Grid>
+                    <Grid item xs = {2} style ={{display : 'flex' , alignItems : 'center'}}>
                         <Button onClick = {() => {handleDeleteChar(index)}}>
                             <DeleteIcon>
                             </DeleteIcon>
@@ -95,14 +104,16 @@ const BackGround = (props) => {
 const mapStateToProps = (state) => {
     return {
         Characters : state.settings.Characters,
-        Section : state.settings.Section
+        Section : state.settings.Section,
+        SectionTeamTwo : state.settings.SectionTeamTwo
     }
   }
   
   const mapDispatchToProps = (dispatch) => {
     return {
-        ChangeSection: (newSection) => dispatch({type : 'ChangeSection' , newSection : newSection}),
+        ChangeSection: (newSection , index) => dispatch({type : 'ChangeSection' , newSection : newSection , index : index}),
         ChangeCharacters: (newCharacters) => dispatch({type : 'ChangeCharacters' , newCharacters : newCharacters}),    
+        
     }
   }
   
