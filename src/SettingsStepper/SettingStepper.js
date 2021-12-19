@@ -8,6 +8,10 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import useState from 'react'
 import BackGround from './Steps/BackGround'
+import Setting from './Steps/Setting'
+import Players from './Steps/Players'
+import Resources from './Steps/Resources'
+import GameRules from './Steps/GameRules'
 
 const steps = ['BackGround', 'Setting', 'Players And Roles', 'Resources' , 'Game Rules'];
 
@@ -53,20 +57,22 @@ const SettingStepper = (props) => {
             </React.Fragment>
         ) : (
         <React.Fragment>
-          <BackGround></BackGround>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            {activeStep === 0 ?
+            <BackGround></BackGround> : activeStep === 1? <Setting></Setting>: activeStep == 2 ? <Players></Players> : activeStep === 3 ? <Resources></Resources> : activeStep === 4 ? <GameRules></GameRules> : <></>}
+          
+            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 ,justifyContent : 'center'}}>
                 <Button
                 color="inherit"
                 disabled={activeStep === 0}
                 onClick={handleBack}
                 sx={{ mr: 1 }}
+                style = {{}}
                 >
-                Back
+                 <Typography style = {{textTransform : 'none'}}>Back</Typography>
                 </Button>
-                <Box sx={{ flex: '1 1 auto' }} />
-                    <Button onClick={handleNext}>
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                    </Button>
+                <Button onClick={handleNext}>
+                {activeStep === steps.length - 1 ? <Typography style = {{textTransform : 'none'}}>Finish</Typography> : <Typography style = {{textTransform : 'none'}}>Next</Typography>}
+                </Button>
             </Box>
         </React.Fragment>
       )}

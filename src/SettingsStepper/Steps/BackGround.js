@@ -13,8 +13,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const BackGround = (props) => {
 
-    const [Section, setSection] = React.useState('');
-    const [Characters , setCharacters] = React.useState([])
+
+    const [Characters , setCharacters] = React.useState(props.Characters ?props.Characters : [])
 
     const handleChange = (value , setFunc) => {
         setFunc(value)
@@ -25,18 +25,17 @@ const BackGround = (props) => {
         UpdatedCharacters[index][valueName] = value
         setCharacters(UpdatedCharacters)
         props.ChangeCharacters(UpdatedCharacters)
+        console.log(props.Characters , 'chars')
     }
 
     const handleAddChar = () => {
         let UpdatedCharacters = [...Characters , {Name : '' , Description : ''}]
         setCharacters(UpdatedCharacters)
-        console.log(Characters)
     }
 
     const handleDeleteChar = (index) => {
         let UpdatedCharacters = [...Characters]
         UpdatedCharacters.splice(index,1)
-        console.log(UpdatedCharacters,index)
         setCharacters(UpdatedCharacters)
         props.ChangeCharacters(UpdatedCharacters)
     }
@@ -45,12 +44,12 @@ const BackGround = (props) => {
     return(
         <Grid container spacing = {5} style ={{marginLeft : '30px'}}>
             <Grid item xs = {12}>
-                <Typography>BackGround</Typography>
+                <Typography style = {{fontSize : '32px'}}>BackGround</Typography>
                 <Divider style = {{width: '20%'}}/>
             </Grid>
             <Grid item xs = {3}>
                 <InputLabel id="demo-simple-select-label">Section</InputLabel>
-                <Select value = {props.Section} variant= {'outlined'}  onChange = {(value) => {handleChange(value , props.ChangeSection)}} fullWidth>
+                <Select value = {props.Section} variant= {'outlined'}  onChange = {(event) => {handleChange(event.target.value , props.ChangeSection)}} fullWidth>
                     <MenuItem value={190}>190</MenuItem>
                     <MenuItem value={130}>130</MenuItem>
                     <MenuItem value={150}>150</MenuItem>
@@ -83,10 +82,8 @@ const BackGround = (props) => {
                 </>)
             })}
            
-            <Grid item xs = {6}>
-            </Grid>
-            <Grid item xs = {2}>
-                <Button style = {{backgroundColor : '#06DB69' , color : 'white'}} onClick = {() => {handleAddChar()}}>
+            <Grid item xs = {12}>
+                <Button style = {{backgroundColor : '#06DB69' , color : 'white' , display : 'flex' , justifyContent : 'center'}} onClick = {() => {handleAddChar()}}>
                     <Typography style = {{textTransform : 'none'}}>Add</Typography>
                 </Button>
             </Grid>
