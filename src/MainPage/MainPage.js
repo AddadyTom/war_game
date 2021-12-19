@@ -20,12 +20,15 @@ import PaymentIcon from '@material-ui/icons/Payment';
 import MapIcon from '@material-ui/icons/Map';
 import InfoIcon from '@material-ui/icons/Info';
 import Grid from '@material-ui/core/Grid'
-
+import BackGround from '../SettingsStepper/Steps/BackGround';
+import Chat from '../chat'
 
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
+  color : 'white' ,
+  backgroundImage : 'linear-gradient(#595CFF, #8BBEFC)',
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -39,6 +42,7 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
+  backgroundImage : 'linear-gradient(#595CFF, #8BBEFC)',
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(9)} + 1px)`,
@@ -54,29 +58,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
+
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
+    backgroundImage : 'linear-gradient(45deg, blue, red);',
     flexShrink: 0,
-    whiteSpace: 'nowrap',
+    backgroundColor : 'black',
     boxSizing: 'border-box',
     ...(open && {
       ...openedMixin(theme),
@@ -102,15 +91,15 @@ export default function MiniDrawer() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-    
+    <>
+    <Box sx={{ display: 'flex'}} >
       <Drawer variant="permanent" open={open}>
         <DrawerHeader style = {{ display : 'flex' , alignItems : 'center' , justifyContent : open  ? 'flex-end' : 'center'}}>
             {open ?
             <>
             <span style = {{position : 'relative' , right : '50%'}}>War-Net</span>
               <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+              {theme.direction === 'rtl' ? <ChevronRightIcon style = {{color : 'white'}}/> : <ChevronLeftIcon style = {{color : 'white'}}/>}
             </IconButton> </>: 
                       <IconButton
                       color="inherit"
@@ -132,16 +121,18 @@ export default function MiniDrawer() {
           {['Chat', 'Resources', 'Map', 'Game Background'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
-                {index === 0 ? <SendIcon /> :  index === 1 ? <PaymentIcon /> : index === 2 ? <MapIcon></MapIcon> : index === 3 ? <InfoIcon></InfoIcon> : <></>}
+                {index === 0 ? <SendIcon style = {{color : 'white'}}/> :  index === 1 ? <PaymentIcon style = {{color : 'white'}}/> : index === 2 ? <MapIcon style = {{color : 'white'}}></MapIcon> : index === 3 ? <InfoIcon style = {{color : 'white'}}></InfoIcon> : <></>}
               </ListItemIcon>
               <ListItemText primary={text}/>
             </ListItem>
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        
-      </Box>
     </Box>
+    <div style = {{marginLeft : '250px' , width: '85%'}}>
+    <Chat style = {{position : 'relative'}} user = {{name : 'yonatan' , pass: '1234'}}></Chat>
+    </div>
+   
+    </>
   );
 }

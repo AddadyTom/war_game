@@ -28,7 +28,7 @@ const Players = (props) => {
     }
 
     const handleAddEvent = () => {
-        let UpdatedRoles = [...Roles , {Role : '' , Description : ''}]
+        let UpdatedRoles = [...Roles , {Role : '' , Description : '', Section : ''}]
         setRoles(UpdatedRoles)
     }
 
@@ -62,7 +62,14 @@ const Players = (props) => {
                         <TextField multiline value = {Role.Description} variant= {'outlined'}  onChange = {(event) => {handleEventChange(event.target.value , index , 'Description')}} fullWidth>
                         </TextField>
                     </Grid> 
-                    <Grid item xs = {5} style ={{display : 'flex' , alignItems : 'center'}}>
+                    <Grid item xs ={3}>
+                    <InputLabel id="demo-simple-select-label">Team</InputLabel>
+                        <Select value = {Role['Section']} variant= {'outlined'}  onChange = {(event) => {handleEventChange(event.target.value , index , 'Section')}} fullWidth>
+                            <MenuItem value={'Russia'}>Russia</MenuItem>
+                            <MenuItem value={'United States'}>United States</MenuItem>
+                        </Select>
+                    </Grid>
+                    <Grid item xs = {2} style ={{display : 'flex' , alignItems : 'center'}}>
                         <Button onClick = {() => {handleDeleteEvent(index)}}>
                             <DeleteIcon>
                             </DeleteIcon>

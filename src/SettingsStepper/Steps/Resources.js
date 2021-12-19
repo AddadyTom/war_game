@@ -28,7 +28,7 @@ const Resources = (props) => {
     }
 
     const handleAddEvent = () => {
-        let UpdatedResources = [...Resources , {Resource : '' , Description : ''}]
+        let UpdatedResources = [...Resources , {Resource : '' , Description : '', Section : ''}]
         setResources(UpdatedResources)
     }
 
@@ -60,7 +60,14 @@ const Resources = (props) => {
                         <TextField multiline value = {Resource.Description} variant= {'outlined'}  onChange = {(event) => {handleEventChange(event.target.value , index , 'Description')}} fullWidth>
                         </TextField>
                     </Grid> 
-                    <Grid item xs = {5} style ={{display : 'flex' , alignItems : 'center'}}>
+                    <Grid item xs ={3}>
+                    <InputLabel id="demo-simple-select-label">Team</InputLabel>
+                        <Select value = {Resource['Section']} variant= {'outlined'}  onChange = {(event) => {handleEventChange(event.target.value , index , 'Section')}} fullWidth>
+                            <MenuItem value={'Russia'}>Russia</MenuItem>
+                            <MenuItem value={'United States'}>United States</MenuItem>
+                        </Select>
+                    </Grid>
+                    <Grid item xs = {2} style ={{display : 'flex' , alignItems : 'center'}}>
                         <Button onClick = {() => {handleDeleteEvent(index)}}>
                             <DeleteIcon>
                             </DeleteIcon>
