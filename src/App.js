@@ -15,11 +15,11 @@ function App() {
   if(loggedIn) {
     return (
       <Routes>
-        <Route path='/joinGame' element={<GameSelection/>} />
-        <Route path='/createGame' element={<SettingStepper/>} />
-        <Route path='/home' element={<GameSelection/>} />
-        <Route path='/selection' element={<GameSelection/>} />
-        <Route path="/login" element={<Navigate to ="/selection" />}/>
+        <Route excact path='/selection/joinGame' element={<GameSelection/>} />
+        <Route excact path='/selection/createGame' element={<SettingStepper/>} />
+        <Route excact path='/home' element={<GameSelection/>} />
+        <Route excact path='/selection' element={<GameSelection/>} />
+        <Route excact path="/login" element={<Navigate to ="/selection" />}/>
         <Route path="*" element={<Navigate to ="/selection" />}/>
       </Routes>
     );
